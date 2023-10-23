@@ -73,6 +73,10 @@ Let's consider a simplified example to illustrate the difference between FlashAt
 ### Critical Analysis
 - **Future Applications**: FlashAttention-2 makes it possible for video generation which require long sequences.
 
+- **Advantages**: FlashAttention-2 works well for longer sequences.
+
+- **Disadvantages**: FlashAttention-2 is not as efficient as FlashAttention for shorter sequences.
+
 
 ## Resource links
 1. OpenAI. Gpt-4 technical report.https://arxiv.org/pdf/2303.08774.pdf
