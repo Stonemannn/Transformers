@@ -4,10 +4,10 @@ Citation: Dao, T. (2023). FlashAttention-2: Faster Attention with Better Paralle
 
 GitHub Repository: [https://crfm.stanford.edu/2023/07/17/flash2.html]
 
-
+## Overview
 The attention layer is the main bottleneck in scaling Transformers to longer sequences. Its runtime and memory increase quadratically with sequence length. It is important to speed up the calculation for attention.
 
-## Question 1: How to speed up the calculation for attention?
+### Question 1: How to speed up the calculation for attention?
 
 **Answer:** 
 - There are several ways to speed up the calculation for attention.
@@ -28,7 +28,7 @@ The attention layer is the main bottleneck in scaling Transformers to longer seq
 
 - **Speedup**: FlashAttention achieves 2-4× wall-clock time speedup over standard attention.
 
-## Question 2: Is FlashAttention perfect? Is there any other way to speed up FlashAttention?
+### Question 2: Is FlashAttention perfect? Is there any other way to speed up FlashAttention?
 
 **Answer:**
 - FlashAttention-2 is an improved version of FlashAttention. It aims to address the inefficiencies in FlashAttention by better work partitioning between different thread blocks and warps on the GPU.
