@@ -5,20 +5,16 @@ Citation: Dao, T. (2023). FlashAttention-2: Faster Attention with Better Paralle
 GitHub Repository: [https://crfm.stanford.edu/2023/07/17/flash2.html]
 
 
-Today I'll be presenting a paper that addresses the challenges of speeding up attention mechanisms in Transformers. The paper is titled "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning" by Tri Dao. I will only focus on Forward Pass Attention in this presentation.
-
 The attention layer is the main bottleneck in scaling Transformers to longer sequences. Its runtime and memory increase quadratically with sequence length. It is important to speed up the calculation for attention.
 
 ## Question 1: How to speed up the calculation for attention?
 
 **Answer:** 
-- there are several ways to speed up the calculation for attention.
+- There are several ways to speed up the calculation for attention.
 
-- First way is focusing on reducing the FLOP complexity. The FLOP complexity for sequences of length n is of O(n^2). Methods like Performers approximate the softmax attention mechanism, reducing the complexity to linear O(n). However, these methods do not display wall-clock speedup against standard attention and have not gained wide adoption. In fact, on modern GPUs, compute speed has out-paced memory speed, and most operations in Transformers are bottlenecked by memory accesses.
+- This paper is making attention algorithms IO-aware —that is, accounting for reads and writes to different levels of fast and slow memory (e.g., between fast GPU on-chip SRAM and relatively slow GPU high bandwidth memory, or HBM)
 
-- This paper is making attention algorithms IO-aware —that is, accounting for reads and writes to different levels of fast and slow memory (e.g., between fast GPU on-chip SRAM and relatively slow GPU high bandwidth memory, or HBM
-
-- **How it Works**: It reorders the attention computation and leverages classical techniques like tiling and recomputation to significantly speed it up and reduce memory usage.
+- **How FlashAttention Works**: It reorders the attention computation and uses classical techniques like tiling and recomputation to significantly speed up and reduce memory usage.
 
 ![Flash Attention Banner](https://github.com/Dao-AILab/flash-attention/blob/main/assets/flashattn_banner.jpg?raw=true)
 
@@ -30,17 +26,16 @@ The attention layer is the main bottleneck in scaling Transformers to longer seq
 **Algorithm 1: FlashAttention**
 ![flash attention](https://github.com/Stonemannn/Transformers/blob/36f93dcb69ba4d846f44c1082fab93d1c901ef00/Mid-term%20Presentation/figures/FlashAttention.png?raw=true)
 
+- **Speedup**: FlashAttention achieves 2-4× wall-clock time speedup over standard attention.
 
-FlashAttention achieves 2-4× wall-clock time speedup over standard attention.
-
-## Question 2: Is FlashAttention perfect? Is there any other way to speed up the FlashAttention?
+## Question 2: Is FlashAttention perfect? Is there any other way to speed up FlashAttention?
 
 **Answer:**
 - FlashAttention-2 is an improved version of FlashAttention. It aims to address the inefficiencies in FlashAttention by better work partitioning between different thread blocks and warps on the GPU.
 
 ![partitioning](https://github.com/Stonemannn/Transformers/blob/36f93dcb69ba4d846f44c1082fab93d1c901ef00/Mid-term%20Presentation/figures/flash_flash2_partitioning.png?raw=true)
 
-Let's consider a simplified example to illustrate the difference between FlashAttention and FlashAttention-2 in terms of shared memory usage. Assume we have a $Q$, $K$, and $V$ matrix, and we are using 4 warps (W1, W2, W3, W4) for computation.
+Let's consider a simplified example to illustrate the difference between FlashAttention and FlashAttention-2 in terms of shared memory usage. Assume we have $Q$, $K$, and $V$ matrices, and we are using 4 warps (W1, W2, W3, W4) for computation.
 
 ### FlashAttention:
 
@@ -71,12 +66,12 @@ Let's consider a simplified example to illustrate the difference between FlashAt
 ---
 
 
-- **Speedup**: Number of writes to HBM complexties are not the same order of magnitude . These yield around 2× speedup compared to FlashAttention
+- **Speedup**: FlashAttention-2 yield around 2× speedup compared to FlashAttention
 
 ![speedup](https://github.com/Stonemannn/Transformers/blob/36f93dcb69ba4d846f44c1082fab93d1c901ef00/Mid-term%20Presentation/figures/flash2_a100_fwd_bwd_benchmark.png?raw=true)
 
 ### Critical Analysis
-- **Future Applications**: It promises to unlock new applications in video generation which require long sequences.
+- **Future Applications**: FlashAttention-2 makes it possible for video generation which require long sequences.
 
 
 ## Resource links
