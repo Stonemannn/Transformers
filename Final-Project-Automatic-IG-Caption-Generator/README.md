@@ -1,9 +1,11 @@
-# Project: Self-Generated Instagram Captions
+# Project: Instagram Caption Generator
 
 ## Overview
 According to Forbes, the number of social media users worldwide has swelled to 4.9 billion globally for the year of 2023 (Forbes, 2023). Across platforms, approximately 50 million are self-proclaimed “influencers”, those who utilize platforms to make some form of income. Influencers constantly compete for attention in the world of social media, and victory heavily relies on the quality of their content, especially the quality of their captions.
 
-In this project, I will be using the [Instagram Images with Captions](https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions) dataset from Kaggle to fine tune a pretrained model on Hugging Face that can generate high quality IG-like captions for photos automatically. 
+![post_sample](https://github.com/Stonemannn/Transformers/blob/15021a72e7bbbf96d9dd46c34d4c4bbe2cd18f38/post_sample.png)
+
+In this project, I will be using the [Instagram Images with Captions](https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions) dataset from Kaggle to fine tune a pretrained model on Hugging Face that can generate high quality IG-like captions for photos automatically. ​The dataset contains 20.5K scraped Instagram posts in jpg with their accompanying captions in a CSV file. Due to my laptop's limited computing power, I will be using a subset of the dataset that contains 5K images and captions.
 
 
 ## Model Selection
@@ -58,11 +60,11 @@ The fine-tuning will be done twice for each selected pre-trained model. The firs
 - Model 4: I'm not sure what kind of city this is in but it's definitely not me.
 
 ### Critical Analysis
-- **Future Applications**: FlashAttention-2 makes it possible for video generation which require long sequences.
+- **Future Applications**: This model can be extended to generate captions for other social media platforms such as Twitter, Facebook, and TikTok. It can also be extended to generate captions for other types of media such as videos and audio files.
 
-- **Advantages**: FlashAttention-2 works well for longer sequences.
+- **Advantages**: Saves time and effort for influencers who are constantly competing for attention in the world of social media.
 
-- **Disadvantages**: FlashAttention-2 is not as efficient as FlashAttention for shorter sequences.
+- **Disadvantages**: Only fine-tuned on a subset of the dataset due to limited computing power. The model is not able to generate really attractive captions that can help influencers gain more followers.
 
 ## Fine-Tuning Dataset
 - https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions
