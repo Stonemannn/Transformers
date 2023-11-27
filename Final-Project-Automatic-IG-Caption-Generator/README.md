@@ -1,11 +1,17 @@
 # Project: Instagram Caption Generator
 
 ## Overview
-According to Forbes, the number of social media users worldwide has swelled to 4.9 billion globally for the year of 2023 (Forbes, 2023). Across platforms, approximately 50 million are self-proclaimed “influencers”, those who utilize platforms to make some form of income. Influencers constantly compete for attention in the world of social media, and victory heavily relies on the quality of their content, especially the quality of their captions.
+According to Forbes, the global count of social media users has reached a staggering 4.9 billion in 2023. Among these users, about 50 million identify as "influencers" — individuals who use these platforms to earn income. In the competitive world of social media, influencers vie for attention, and the success of their content is crucial. However, the captions accompanying their posts are equally important. Captions provide context, allowing influencers to showcase their creativity and personality.
 
 ![post_sample](https://github.com/Stonemannn/Transformers/blob/15021a72e7bbbf96d9dd46c34d4c4bbe2cd18f38/post_sample.png)
 
-In this project, I will be using the [Instagram Images with Captions](https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions) dataset from Kaggle to fine tune a pretrained model on Hugging Face that can generate high quality IG-like captions for photos automatically. ​The dataset contains 20.5K scraped Instagram posts in jpg with their accompanying captions in a CSV file. Due to my laptop's limited computing power, I will be using a subset of the dataset that contains 5K images and captions.
+In this project, I'm exploring the use of [Instagram Images with Captions](https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions) dataset from Kaggle titled Instagram Images with Captions. This dataset features 20.5K Instagram posts, complete with images in JPG format and their respective captions in a CSV file. Due to the limitations of my laptop’s computing power, I’ll be focusing on a subset of this dataset, which includes 5,000 images and captions.
+
+## Data Preprocessing
+1. **Conversion to Dataset Format:** First, I'll transform both the images and captions into a format compatible with HuggingFace's Dataset.
+2. **Feature Extraction:** Next, each image in the dataset will undergo feature extraction using the chosen pre-trained image encoder model.
+3. **Caption Tokenization:** The captions will be processed using the pre-trained text decoder model to tokenize them effectively.
+4. **Dataset Splitting:** Finally, I'll divide the dataset into two parts: 80% for training and 20% for testing. (Note: Ultimately, I chose to test the model using some of my own photos, since the original dataset contained too much noise.)
 
 
 ## Model Selection
@@ -17,6 +23,10 @@ In this project, I will be using the [Instagram Images with Captions](https://ww
     - For text_decoder_model = **"nlpconnect/vit-gpt2-image-captioning"**.
 
 The fine-tuning will be done twice for each selected pre-trained model. The first fine-tuning will be done only on the last GPT2 block in the selected model, which means I need to freeze all the prior layers. The second fine-tuning will be done on all the parameters in the selected model.
+
+### Quick introduction to Vit (Vision Transformer)
+Vision transformers are an implementation of transformer architecture repurposed for use on images. The Vision Transformer (ViT) transforms images into fixed-size patches, treating them as tokens (Dosovitskiy, 2020). These patches are linearly embedded and combined with positional encodings. The transformer architecture processes these embeddings, capturing both local and global dependencies through self-attention mechanisms. Unlike traditional convolutional neural networks, ViT operates on global information simultaneously. 
+
 
 ## Model Evaluation
 ![example5](https://github.com/Stonemannn/Transformers/blob/124f2c7ade694a7d302463f5385c0a786d90ae92/Final-Project-Automatic-IG-Caption-Generator/test_images/example5.JPG)
@@ -58,6 +68,8 @@ The fine-tuning will be done twice for each selected pre-trained model. The firs
 - Model 3: I'm not sure if this is a good place to start my journey. 
 
 - Model 4: I'm not sure what kind of city this is in but it's definitely not me.
+
+**Conclusion** In my opinion, Model 3, which is only fine-tuned on the last GPT2 block of pre-fine-tuned image-captioning model: nlpconnect/vit-gpt2-image-captioning, stands out as the best choice. It impressively incorporates the use of emojis in captions, and at the same time, accurately identifies the subjects of the photos.
 
 ### Critical Analysis
 - **Future Applications**: This model can be extended to generate captions for other social media platforms such as Twitter, Facebook, and TikTok. It can also be extended to generate captions for other types of media such as videos and audio files.
