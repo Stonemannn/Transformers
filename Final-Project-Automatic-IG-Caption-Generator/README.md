@@ -3,7 +3,7 @@
 ## Overview
 According to Forbes, the global count of social media users has reached about 5 billion in 2023. Among these users, about 50 million identify as "influencers" — individuals who use these platforms to earn income. In the competitive world of social media, influencers vie for attention, and the success of their content is crucial. However, the captions accompanying their posts are equally important. Captions provide context, allowing influencers to showcase their creativity and personality.
 
-![post_sample](https://github.com/Stonemannn/Transformers/blob/15021a72e7bbbf96d9dd46c34d4c4bbe2cd18f38/post_sample.png](https://github.com/Stonemannn/Transformers/blob/94391099c5372b1806551bf8bc75aac1292e7f69/Final-Project-Automatic-IG-Caption-Generator/post_sample.png)
+![post_sample](https://github.com/Stonemannn/Transformers/blob/989ec6686e74a4327d1de097bda3c46e98669a15/Final-Project-Automatic-IG-Caption-Generator/post_sample.png)
 
 In this project, I'm exploring the use of [Instagram Images with Captions](https://www.kaggle.com/datasets/prithvijaunjale/instagram-images-with-captions) dataset from Kaggle titled Instagram Images with Captions. This dataset features 20.5K Instagram posts, complete with images in JPG format and their respective captions in a CSV file. Due to the limitations of my laptop’s computing power, I’ll be focusing on a subset of this dataset, which includes 5,000 images and captions.
 
